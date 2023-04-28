@@ -13,7 +13,7 @@
     <a href="https://artemnih.github.io/ngx-explorer/"><strong>Demo »</strong></a>
     <br />
     <br />    
-            <p align="center">Web:<a href="https://artemiscode.es"><strong>ArtemisCode</strong></a></p>
+            <p align="center">Web:<a href="https://artemiscode.es"><strong> ArtemisCode</strong></a></p>
   </p>
 </div>
 
