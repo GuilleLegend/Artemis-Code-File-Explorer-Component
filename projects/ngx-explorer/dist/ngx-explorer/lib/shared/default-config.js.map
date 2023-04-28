@@ -1,0 +1,1 @@
+{"version":3,"file":"default-config.js","sourceRoot":"","sources":["../../../../src/lib/shared/default-config.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,MAAM,GAAsB;IACrC,YAAY,EAAE,OAAO;CACxB,CAAC","sourcesContent":["import { NgeExplorerConfig } from './types';\r\n\r\nexport const Config: NgeExplorerConfig = {\r\n    homeNodeName: 'Files'\r\n};\r\n"]}

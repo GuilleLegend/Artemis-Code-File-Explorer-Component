@@ -1,0 +1,3 @@
+# Excluir todo excepto la carpeta dist
+*
+!dist

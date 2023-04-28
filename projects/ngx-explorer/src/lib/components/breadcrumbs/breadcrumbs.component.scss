@@ -1,0 +1,16 @@
+.nxe-breadcrumbs {
+    .nxe-breadcrumb-button {
+        cursor: pointer;
+        padding: 5px 5px;
+        border-radius: 5px;
+        background: transparent;
+        border: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+
+        &:hover {
+            background-color: #d7edff;
+        }
+    }
+}

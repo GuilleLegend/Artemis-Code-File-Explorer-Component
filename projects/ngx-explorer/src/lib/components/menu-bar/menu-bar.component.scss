@@ -1,0 +1,38 @@
+@import "../vars.scss";
+
+.nxe-menu-bar {
+    display: flex;
+
+    .nxe-menu-bar-left {
+        flex-grow: 1;
+        padding: 10px;
+    }
+
+    .nxe-menu-bar-button {
+        cursor: pointer;
+        padding: 5px 5px;
+        border-radius: 5px;
+        background: transparent;
+        border: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        margin-right: 20px;
+
+        .nxe-folder {
+            color: $folder-bg;
+        }
+
+        .nxe-arrows-cw {
+            color: #008000
+        }
+
+        .nxe-trash-empty {
+            color: $negative-red;
+        }
+
+        &:hover {
+            background-color: #d7edff;
+        }
+    }
+}
