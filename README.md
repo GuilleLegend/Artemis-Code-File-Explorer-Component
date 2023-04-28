@@ -1,10 +1,6 @@
 <div id="top"></div>
 <br />
 <div align="center">
-  <a href="https://github.com/GuilleLegend">
-    <img src="docs/ss.png" alt="Logo" width="200" height="150">
-  </a>
-
   <h1 align="center">Artemis Code File Explorer Component</h1>
 
   <p align="center">
@@ -13,7 +9,8 @@
     <a href="https://artemnih.github.io/ngx-explorer/"><strong>Demo »</strong></a>
     <br />
     <br />    
-            <p align="center">Web:<a href="https://artemiscode.es"><strong> ArtemisCode</strong></a></p>
+           <p align="center">Web:<a href="https://artemiscode.es"><strong> ArtemisCode</strong></a></p>
+            <p align="center">Web:<a href="https://www.npmjs.com/package/artemis-file-explorer-component"><strong> Libray</strong></a></p>
   </p>
 </div>
 
