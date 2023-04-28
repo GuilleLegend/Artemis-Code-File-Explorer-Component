@@ -143,6 +143,21 @@ let ExplorerService = class ExplorerService {
             this.tree$.next(this.internalTree);
         }));
     }
+    getCurrentPath() {
+        var _a, _b, _c;
+        let res = 'Home';
+        const path = this.openedNode;
+        if (((_c = (_b = (_a = path.source) === null || _a === void 0 ? void 0 : _a._value) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.path) != undefined) {
+            res = path.source._value.data.path;
+            this.dataService.getCurrentPath(res);
+            return;
+        }
+        else {
+            res = 'Home';
+            this.dataService.getCurrentPath(res);
+            return;
+        }
+    }
 };
 ExplorerService = __decorate([
     Injectable({

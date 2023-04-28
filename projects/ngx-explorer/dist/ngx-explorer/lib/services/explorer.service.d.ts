@@ -29,4 +29,5 @@ export declare class ExplorerService {
     open(): void;
     share(): void;
     private getNodeChildren;
+    getCurrentPath(): void;
 }

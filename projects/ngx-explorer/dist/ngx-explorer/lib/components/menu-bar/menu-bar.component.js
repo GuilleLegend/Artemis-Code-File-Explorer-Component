@@ -35,6 +35,7 @@ let MenuBarComponent = class MenuBarComponent {
     }
     refresh() {
         this.explorerService.refresh();
+        this.explorerService.getCurrentPath();
     }
     rename() {
         if (this.selection.length === 1) {

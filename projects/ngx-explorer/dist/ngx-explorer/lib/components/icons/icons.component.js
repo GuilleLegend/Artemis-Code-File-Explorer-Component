@@ -7,7 +7,42 @@ let IconsComponent = class IconsComponent extends BaseView {
         super(explorerService, helperService, filter);
         this.icons = {
             node: 'nxe-folder',
-            leaf: 'nxe-doc',
+            leaf: 'txt',
+            pdf: 'pdf',
+            audio: 'audio',
+            code: 'code',
+            doc: 'doc',
+            exe: 'exe',
+            odp: 'odp',
+            img: 'photo',
+            pptx: 'pptx',
+            vector: 'vector',
+            video: 'video',
+            xlsx: 'xlsx',
+            zip: 'zip',
+        };
+        this.photoMap = {
+            'application/pdf': 'pdf',
+            'application/msword': 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'doc',
+            'application/vnd.oasis.opendocument.presentation': 'odp',
+            'application/vnd.oasis.opendocument.spreadsheet': 'ods',
+            'application/vnd.ms-powerpoint': 'pptx',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+            'text/plain': 'txt',
+            'video/mp4': 'video',
+            'application/vnd.ms-excel': 'xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+            'image/jpeg': 'photo',
+            'image/png': 'photo',
+            'audio/x-ms-wma': 'audio',
+            'audio/mpeg': 'audio',
+            'audio/webm': 'audio.',
+            'audio/ogg': 'audio',
+            'audio/wav': 'audio',
+            'application/x-msdownload': 'exe',
+            'application/zip': 'zip',
+            'image/svg+xml': 'vector'
         };
     }
     openner(event, item) {
@@ -18,7 +53,8 @@ let IconsComponent = class IconsComponent extends BaseView {
             this.open(event, item);
         }
     }
-    doubleClick(item) {
+    rightClick(event, item) {
+        super.select(event, item);
         this.dbClick(item);
     }
     select(event, item) {
@@ -28,6 +64,14 @@ let IconsComponent = class IconsComponent extends BaseView {
     emptySpaceClick() {
         super.emptySpaceClick();
         this.emptyClick();
+    }
+    getIcons(item) {
+        return item.isLeaf ? this.getIconByFileType(item.data) : this.icons.node;
+    }
+    getIconByFileType(data) {
+        let fileType = this.getFileType(data);
+        const photoName = this.photoMap[fileType] || 'txt';
+        return photoName;
     }
 };
 IconsComponent = __decorate([

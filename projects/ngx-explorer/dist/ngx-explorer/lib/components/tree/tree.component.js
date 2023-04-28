@@ -17,6 +17,7 @@ let TreeComponent = class TreeComponent {
     open(node) {
         this.addExpandedNode(node.id);
         this.explorerService.openNode(node.id);
+        this.explorerService.getCurrentPath();
     }
     expand(node) {
         this.addExpandedNode(node.id);

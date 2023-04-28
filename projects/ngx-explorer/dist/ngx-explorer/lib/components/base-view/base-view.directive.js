@@ -28,6 +28,15 @@ let BaseView = class BaseView {
     getDisplayName(data) {
         return this.helperService.getName(data);
     }
+    getFileType(data) {
+        return this.helperService.getFileType(data);
+    }
+    getLastModified(data) {
+        return this.helperService.getLastModified(data);
+    }
+    getSize(data) {
+        return this.helperService.getSize(data);
+    }
     select(event, item) {
         const selectedIndex = this.selection.findIndex(i => i === item);
         const alreadySelected = selectedIndex !== -1;
@@ -47,6 +56,7 @@ let BaseView = class BaseView {
         const metaKeyPressed = event.metaKey || event.ctrlKey || event.shiftKey;
         if (!metaKeyPressed) {
             this.explorerService.openNode(item.id);
+            this.explorerService.getCurrentPath();
         }
     }
     dbClick(item) {
@@ -57,6 +67,7 @@ let BaseView = class BaseView {
     }
     emptyClick() {
         this.explorerService.emptyClick();
+        this.explorerService.getCurrentPath();
     }
     openLeaf(event, item) {
         const metaKeyPressed = event.metaKey || event.ctrlKey || event.shiftKey;

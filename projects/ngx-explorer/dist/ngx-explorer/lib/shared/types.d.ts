@@ -27,9 +27,13 @@ export interface IDataService<T> {
     rightClick(node: T): Observable<any>;
     leftClick(node: T): Observable<any>;
     emptyClick(): Observable<any>;
+    getCurrentPath(path: string): Observable<any>;
 }
 export interface IHelperService {
     getName<T>(data: T): string;
+    getFileType<T>(data: T): string;
+    getLastModified<T>(data: T): string;
+    getSize<T>(data: T): string;
 }
 export declare enum AvialableView {
     List = "List",

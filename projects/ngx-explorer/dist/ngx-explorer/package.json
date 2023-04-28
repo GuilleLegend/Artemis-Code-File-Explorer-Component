@@ -19,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GuilleLegend/ngx-file-explorer.git"
+    "url": "https://github.com/GuilleLegend/Artemis-Code-File-Explorer-Component"
   },
   "author": "@agilmoy, @GuilleLegend",
   "license": "MIT",
   "description": "Simple File Explorer for Angular",
   "bugs": {
-    "url": "https://github.com/GuilleLegend/ngx-file-explorer/issues"
+    "url": "https://github.com/GuilleLegend/Artemis-Code-File-Explorer-Component/issues"
   },
   "keywords": [
     "angular",

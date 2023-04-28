@@ -14,4 +14,5 @@ export declare abstract class DataService implements IDataService<any> {
     abstract rightClick(node: any): any;
     abstract leftClick(node: any): any;
     abstract emptyClick(): any;
+    abstract getCurrentPath(path: string): any;
 }

@@ -14,6 +14,9 @@ export declare class BaseView implements OnDestroy {
     constructor(explorerService: ExplorerService, helperService: HelperService, filter: BehaviorSubject<string>);
     get filteredItems(): INode[];
     getDisplayName(data: any): string;
+    getFileType(data: any): string;
+    getLastModified(data: any): string;
+    getSize(data: any): string;
     select(event: MouseEvent, item: INode): void;
     open(event: MouseEvent, item: INode): void;
     dbClick(item: INode): void;
