@@ -29,6 +29,15 @@ export class BaseView {
     getDisplayName(data) {
         return this.helperService.getName(data);
     }
+    getFileType(data) {
+        return this.helperService.getFileType(data);
+    }
+    getLastModified(data) {
+        return this.helperService.getLastModified(data);
+    }
+    getSize(data) {
+        return this.helperService.getSize(data);
+    }
     select(event, item) {
         const selectedIndex = this.selection.findIndex(i => i === item);
         const alreadySelected = selectedIndex !== -1;
@@ -48,6 +57,7 @@ export class BaseView {
         const metaKeyPressed = event.metaKey || event.ctrlKey || event.shiftKey;
         if (!metaKeyPressed) {
             this.explorerService.openNode(item.id);
+            this.explorerService.getCurrentPath();
         }
     }
     dbClick(item) {
@@ -56,8 +66,9 @@ export class BaseView {
     dbSelect(item) {
         this.explorerService.dbSelect(item);
     }
-    emptyClick(){
+    emptyClick() {
         this.explorerService.emptyClick();
+        this.explorerService.getCurrentPath();
     }
     openLeaf(event, item) {
         const metaKeyPressed = event.metaKey || event.ctrlKey || event.shiftKey;

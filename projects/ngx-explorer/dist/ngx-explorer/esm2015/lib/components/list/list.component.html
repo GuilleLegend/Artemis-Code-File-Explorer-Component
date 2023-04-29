@@ -1,0 +1,34 @@
+<div class="nxe-list" nxeDragDrop (dragging)="dragging = $event">
+    <div class="nxe-list-drag" (click)="emptySpaceClick()" (contextmenu)="emptySpaceClick()"
+        [ngClass]="{ dragging: dragging}"></div>
+    <div class="nxe-list-backpad"></div>
+    <div class="nxe-list-container">
+        <div class="nxe-list-wrapper ">
+            <table>
+                <thead>
+                    <tr>
+                        <th (click)="orderByName()">Name</th>
+                        <th>Type</th>
+                        <th  (click)="orderBySize()">Size</th>
+                        <th  (click)="orderByDate()">Last Modified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of filteredItems" (dblclick)="openner($event, item)"
+                        (click)="select($event, item)" (contextmenu)="rightClick($event, item)"
+                        [ngClass]="{'nxe-list-row-selected':isSelected(item)}">
+                        <td>
+                            <span class="nxe-list-icon">
+                                <i [className]="getIcons(item)"></i>
+                            </span>
+                            {{ getDisplayName(item.data) }}
+                        </td>
+                        <td>{{ getFileType(item.data) }}</td>
+                        <td>{{ getSize(item.data) }}</td>
+                        <td>{{ getLastModified(item.data) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

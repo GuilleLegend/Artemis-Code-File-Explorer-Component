@@ -9,34 +9,79 @@ export class IconsComponent extends BaseView {
         super(explorerService, helperService, filter);
         this.icons = {
             node: 'nxe-folder',
-            leaf: 'nxe-doc',
+            leaf: 'txt',
+            pdf: 'pdf',
+            audio: 'audio',
+            code: 'code',
+            doc: 'doc',
+            exe: 'exe',
+            odp: 'odp',
+            img: 'photo',
+            pptx: 'pptx',
+            vector: 'vector',
+            video: 'video',
+            xlsx: 'xlsx',
+            zip: 'zip',
+        };
+        this.photoMap = {
+            'application/pdf': 'pdf',
+            'application/msword': 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'doc',
+            'application/vnd.oasis.opendocument.presentation': 'odp',
+            'application/vnd.oasis.opendocument.spreadsheet': 'ods',
+            'application/vnd.ms-powerpoint': 'pptx',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+            'text/plain': 'txt',
+            'video/mp4': 'video',
+            'application/vnd.ms-excel': 'xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+            'image/jpeg': 'photo',
+            'image/png': 'photo',
+            'audio/x-ms-wma': 'audio',
+            'audio/mpeg': 'audio',
+            'audio/webm': 'audio.',
+            'audio/ogg': 'audio',
+            'audio/wav': 'audio',
+            'application/x-msdownload': 'exe',
+            'application/zip': 'zip',
+            'image/svg+xml': 'vector'
         };
     }
     openner(event, item) {
         if (item.isLeaf) {
             this.openLeaf(event, item);
-        } else {
+        }
+        else {
             this.open(event, item);
         }
     }
-    doubleClick(item) {
+    rightClick(event, item) {
+        super.select(event, item);
         this.dbClick(item);
     }
     select(event, item) {
-        super.select(event, item)
-        this.dbSelect(item)
+        super.select(event, item);
+        this.dbSelect(item);
     }
-    emptySpaceClick(){
-        super.emptySpaceClick()
-        this.emptyClick()
+    emptySpaceClick() {
+        super.emptySpaceClick();
+        this.emptyClick();
+    }
+    getIcons(item) {
+        return item.isLeaf ? this.getIconByFileType(item.data) : this.icons.node;
+    }
+    getIconByFileType(data) {
+        let fileType = this.getFileType(data);
+        const photoName = this.photoMap[fileType] || 'txt';
+        return photoName;
     }
 }
 IconsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'nxe-icons',
-                template: "<div class=\"nxe-icons\" nxeDragDrop (dragging)=\"dragging = $event\">\n    <div class=\"nxe-icons-drag\" [ngClass]=\"{ dragging: dragging}\"></div>\n    <div class=\"nxe-icons-backpad\" (click)=\"emptySpaceClick()\"></div>\n    <div class=\"nxe-icons-container\">\n        <div class=\"nxe-icons-wrapper\" *ngFor=\"let item of filteredItems\" (dblclick)=\"openner($event, item)\" (click)=\"select($event, item)\" (contextmenu)=\"doubleClick(item)\">\n            <div class=\"nxe-icons-wrapper-inner\" [ngClass]=\"{'nxe-icon-selected':isSelected(item)}\" [title]=\"getDisplayName(item.data)\">\n                <div class=\"nxe-icons-icon\">\n                    <i [className]=\"item.isLeaf ? icons.leaf : icons.node\"></i>\n                </div>\n                <div class=\"nxe-icon-text\">{{ getDisplayName(item.data) }}</div>\n            </div>\n        </div>\n    </div>\n</div>",
+                templateUrl: './icons.component.html',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".nxe-icons{height:100%;position:absolute;width:100%}.nxe-icons .nxe-icons-drag{bottom:2px;left:2px;position:absolute;right:2px;top:2px}.nxe-icons .nxe-icons-drag.dragging{border:2px dashed #30a2ff;margin:-2px}.nxe-icons .nxe-icons-backpad{height:100%;left:0;position:absolute;top:0;width:100%}.nxe-icons .nxe-icons-container{display:flex;flex-wrap:wrap}.nxe-icons .nxe-icons-container .nxe-icons-wrapper{display:inline-block;flex-grow:0;height:110px;margin:10px 10px 0;width:80px;z-index:1}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner{border:1px solid transparent;border-radius:5px;padding-bottom:5px;text-align:center}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner:hover{cursor:pointer}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner .nxe-icons-icon{margin-top:5px}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner .nxe-icons-icon i{color:#555;font-size:50px;font-weight:500}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner .nxe-icons-icon i.nxe-folder{color:#fdb900}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner .nxe-icons-icon i.nxe-doc{-webkit-text-stroke:3px #fff}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner.nxe-icon-selected{background-color:#f1f9ff;border:1px solid #94cfff}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icons-wrapper-inner.nxe-icon-selected .nxe-icons-icon i.nxe-doc{-webkit-text-stroke:3px #f1f9ff}.nxe-icons .nxe-icons-container .nxe-icons-wrapper .nxe-icon-text{-webkit-box-orient:vertical;-webkit-line-clamp:3;display:-webkit-box;overflow:hidden;text-align:center;text-overflow:ellipsis}"]
+                styleUrls: ['./icons.component.scss']
             },] }
 ];
 IconsComponent.ctorParameters = () => [

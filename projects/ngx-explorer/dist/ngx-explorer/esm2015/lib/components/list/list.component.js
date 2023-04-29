@@ -11,14 +11,74 @@ export class ListComponent extends BaseView {
             node: 'nxe-folder',
             leaf: 'nxe-doc',
         };
+        this.photoMap = {
+            'application/pdf': 'pdf',
+            'application/msword': 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'doc',
+            'application/vnd.oasis.opendocument.presentation': 'odp',
+            'application/vnd.oasis.opendocument.spreadsheet': 'ods',
+            'application/vnd.ms-powerpoint': 'pptx',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+            'text/plain': 'txt',
+            'video/mp4': 'video',
+            'application/vnd.ms-excel': 'xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+            'image/jpeg': 'photo',
+            'image/png': 'photo',
+            'audio/x-ms-wma': 'audio',
+            'audio/mpeg': 'audio',
+            'audio/webm': 'audio.',
+            'audio/ogg': 'audio',
+            'audio/wav': 'audio',
+            'application/x-msdownload': 'exe',
+            'application/zip': 'zip',
+            'image/svg+xml': 'vector'
+        };
+    }
+    orderByName() {
+        this.items.sort((a, b) => { var _a, _b; return (_a = a.data) === null || _a === void 0 ? void 0 : _a.name.localeCompare((_b = b.data) === null || _b === void 0 ? void 0 : _b.name); });
+    }
+    orderBySize() {
+        this.filteredItems.sort((a, b) => Number(this.getSize(a)) - Number(this.getSize(b)));
+    }
+    orderByDate() {
+        this.filteredItems.sort((a, b) => new Date(this.getLastModified(a)).getTime() - new Date(this.getLastModified(b)).getTime());
+    }
+    openner(event, item) {
+        if (item.isLeaf) {
+            this.openLeaf(event, item);
+        }
+        else {
+            this.open(event, item);
+        }
+    }
+    rightClick(event, item) {
+        super.select(event, item);
+        this.dbClick(item);
+    }
+    select(event, item) {
+        super.select(event, item);
+        this.dbSelect(item);
+    }
+    emptySpaceClick() {
+        super.emptySpaceClick();
+        this.emptyClick();
+    }
+    getIcons(item) {
+        return item.isLeaf ? this.getIconByFileType(item.data) : this.icons.node;
+    }
+    getIconByFileType(data) {
+        let fileType = this.getFileType(data);
+        const photoName = this.photoMap[fileType] || 'txt';
+        return photoName;
     }
 }
 ListComponent.decorators = [
     { type: Component, args: [{
                 selector: 'nxe-list',
-                template: "<div class=\"nxe-list\" nxeDragDrop (dragging)=\"dragging = $event\">\n    <div class=\"nxe-list-drag\" [ngClass]=\"{ dragging: dragging}\"></div>\n    <div class=\"nxe-list-backpad\" (click)=\"emptySpaceClick()\"></div>\n    <div class=\"nxe-list-container\">\n        <div class=\"nxe-list-wrapper \">\n            <table>\n                <thead>\n                    <tr>\n                        <th>Name</th>\n                        <th>Type</th>\n                        <th>Size</th>\n                        <th>Last Modified</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"let item of filteredItems\" (dblclick)=\"open($event, item)\" (click)=\"select($event, item)\"\n                        [ngClass]=\"{'nxe-list-row-selected':isSelected(item)}\">\n                        <td>\n                            <span class=\"nxe-list-icon\">\n                                <i [className]=\"item.isLeaf ? icons.leaf : icons.node\"></i>\n                            </span>\n                            {{ getDisplayName(item.data) }}\n                        </td>\n                        <td>{{ item.type }}</td>\n                        <td>{{ item.size }}</td>\n                        <td>{{ item.lastModified }}</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>",
+                templateUrl: './list.component.html',
                 encapsulation: ViewEncapsulation.None,
-                styles: [".nxe-list{height:100%;position:absolute;width:100%}.nxe-list .nxe-list-drag{bottom:2px;left:2px;position:absolute;right:2px;top:2px;z-index:1}.nxe-list .nxe-list-drag.dragging{border:2px dashed #30a2ff;margin:-2px}.nxe-list .nxe-list-backpad{height:100%;left:0;position:absolute;top:0;width:100%}.nxe-list .nxe-list-container{display:flex;flex-wrap:wrap}.nxe-list .nxe-list-container .nxe-list-wrapper{display:inline-block;flex-grow:0;height:100%;width:100%;z-index:1}.nxe-list .nxe-list-container .nxe-list-wrapper table{border-collapse:collapse;border-spacing:0;width:100%}.nxe-list .nxe-list-container .nxe-list-wrapper table thead{border-bottom:1px solid #ccc}.nxe-list .nxe-list-container .nxe-list-wrapper table thead tr th{border-collapse:collapse;border-right:1px solid #ccc;border-spacing:0;font-weight:400;padding:10px;text-align:left}.nxe-list .nxe-list-container .nxe-list-wrapper table thead tr th:last-child{border-right:none}.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr:nth-child(2n){background-color:#f4f4f4}.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr.nxe-list-row-selected,.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr:hover{background-color:#d7edff}.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr td{padding:8px 10px}.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr td .nxe-list-icon{color:#555;margin-right:5px}.nxe-list .nxe-list-container .nxe-list-wrapper table tbody tr td .nxe-list-icon .nxe-folder{color:#fdb900}"]
+                styleUrls: ['./list.component.scss']
             },] }
 ];
 ListComponent.ctorParameters = () => [

@@ -1,0 +1,14 @@
+<div class="nxe-icons" nxeDragDrop (dragging)="dragging = $event">
+    <div class="nxe-icons-drag" [ngClass]="{ dragging: dragging}"></div>
+    <div class="nxe-icons-backpad" (click)="emptySpaceClick()" (contextmenu)="emptySpaceClick()"></div>
+    <div class="nxe-icons-container">
+        <div class="nxe-icons-wrapper" *ngFor="let item of filteredItems" (dblclick)="openner($event, item)" (click)="select($event, item)" (contextmenu)="rightClick($event, item)"> 
+            <div class="nxe-icons-wrapper-inner" [ngClass]="{'nxe-icon-selected':isSelected(item)}" [title]="getDisplayName(item.data)">
+                <div class="nxe-icons-icon">
+                    <i [className]="getIcons(item)"></i>
+                </div>
+                <div class="nxe-icon-text">{{ getDisplayName(item.data) }}</div>
+            </div>
+        </div>
+    </div>
+</div>
