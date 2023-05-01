@@ -32,6 +32,20 @@ export class ExplorerService {
             this.selectedNodes$.next([]);
         });
     }
+    dbClick(target) {
+        this.dataService.rightClick(target);
+    }
+    dbSelect(target) {
+        this.dataService.leftClick(target);
+    }
+    emptyClick() {
+        this.dataService.emptyClick();
+    }
+    openLeaf(target) {
+        this.dataService.open(target.data).subscribe(() => {
+            this.refresh();
+        });
+    }
     expandNode(id) {
         this.getNodeChildren(id).subscribe();
     }
@@ -43,15 +57,6 @@ export class ExplorerService {
     }
     refresh() {
         this.openNode(this.openedNode$.value.id);
-    }
-    dbClick(target) {
-        this.dataService.rightClick(target);
-    }
-    dbSelect(target){
-        this.dataService.leftClick(target);
-    }
-    emptyClick(){
-        this.dataService.emptyClick();
     }
     rename(name) {
         const nodes = this.selectedNodes$.value;
@@ -99,26 +104,18 @@ export class ExplorerService {
             this.refresh();
         });
     }
-
     open() {
         const target = this.selectedNodes$.value[0];
         this.dataService.open(target.data).subscribe(() => {
             this.refresh();
-        })
+        });
     }
-    openLeaf(target) {
-        this.dataService.open(target.data).subscribe(() => {
-            this.refresh();
-        })
-    }
-
     share() {
         const target = this.selectedNodes$.value[0];
         this.dataService.share(target.data).subscribe(() => {
             this.refresh();
-        })
+        });
     }
-
     getNodeChildren(id) {
         const parent = this.flatPointers[id];
         if (parent.isLeaf) {
@@ -147,6 +144,21 @@ export class ExplorerService {
             parent.children = nodeChildren.concat(leafChildren);
             this.tree$.next(this.internalTree);
         }));
+    }
+    getCurrentPath() {
+        var _a, _b, _c;
+        let res = 'Home';
+        const path = this.openedNode;
+        if (((_c = (_b = (_a = path.source) === null || _a === void 0 ? void 0 : _a._value) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.path) != undefined) {
+            res = path.source._value.data.path;
+            this.dataService.getCurrentPath(res);
+            return;
+        }
+        else {
+            res = 'Home';
+            this.dataService.getCurrentPath(res);
+            return;
+        }
     }
 }
 ExplorerService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ExplorerService_Factory() { return new ExplorerService(i0.ɵɵinject(i1.DataService)); }, token: ExplorerService, providedIn: "root" });

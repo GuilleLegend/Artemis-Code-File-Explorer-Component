@@ -1,4 +1,4 @@
-export class Utils {
+class Utils {
     static createNode(parentId = 0, isLeaf = false, data) {
         const id = ++this.id;
         return {
@@ -28,4 +28,5 @@ export class Utils {
     }
 }
 Utils.id = 0;
+export { Utils };
 //# sourceMappingURL=utils.js.map

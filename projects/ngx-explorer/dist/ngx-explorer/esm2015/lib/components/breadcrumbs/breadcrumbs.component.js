@@ -17,6 +17,7 @@ export class BreadcrumbsComponent {
     }
     click(crumb) {
         this.explorerService.openNode(crumb.node.id);
+        this.explorerService.getCurrentPath();
     }
     ngOnDestroy() {
         this.sub.unsubscribe();
