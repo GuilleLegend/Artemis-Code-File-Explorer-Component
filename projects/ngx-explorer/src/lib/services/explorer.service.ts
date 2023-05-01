@@ -177,9 +177,9 @@ export class ExplorerService {
 
     public getCurrentPath() {
         let res = 'Home';
-        const path: any = this.openedNode;
+        let path: any = this.openedNode;
         if (path.source?._value?.data?.path != undefined) {
-            res = path.source._value.data.path;
+            res = path;
             this.dataService.getCurrentPath(res);
             return;
         } else {

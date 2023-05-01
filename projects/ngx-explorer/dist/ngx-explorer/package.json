@@ -1,6 +1,6 @@
 {
   "name": "artemis-code-file-manager",
-  "version": "0.4.77",
+  "version": "0.4.81",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
