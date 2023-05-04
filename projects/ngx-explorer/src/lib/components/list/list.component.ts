@@ -16,7 +16,19 @@ export class ListComponent extends BaseView {
 
   public readonly icons = {
     node: 'nxe-folder',
-    leaf: 'nxe-doc',
+    leaf: 'txt',
+    pdf: 'pdf',
+    audio: 'audio',
+    code: 'code',
+    doc: 'doc',
+    exe: 'exe',
+    odp: 'odp',
+    img: 'img',
+    pptx: 'pptx',
+    vector: 'vector',
+    video: 'video',
+    xlsx: 'xlsx',
+    zip: 'zip',
   };
 
   constructor(explorerService: ExplorerService, helperService: HelperService, @Inject(FILTER_STRING) filter: BehaviorSubject<string>) {
@@ -64,7 +76,21 @@ export class ListComponent extends BaseView {
 
   getIconByFileType(data: any): string {
     let fileType = this.getFileType(data)
-    const photoName = this.photoMap[fileType] || 'txt';
+    console.log(data.name);
+
+    let photoName = this.photoMap[fileType] || 'txt';
+
+    if (!fileType) {
+      const type = (data.name).split('.');
+      if (type[type.length - 1] == 'png') {
+        photoName = 'img';
+        return photoName;
+      } else if (type[type.length - 1] == 'jpg') {
+        photoName = 'img';
+        return photoName;
+      }
+    }
+
     return photoName;
   }
 
@@ -80,8 +106,8 @@ export class ListComponent extends BaseView {
     'video/mp4': 'video',
     'application/vnd.ms-excel': 'xlsx',
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-    'image/jpeg': 'photo',
-    'image/png': 'photo',
+    'image/jpeg': 'img',
+    'image/png': 'img',
     'audio/x-ms-wma': 'audio',
     'audio/mpeg': 'audio',
     'audio/webm': 'audio.',
