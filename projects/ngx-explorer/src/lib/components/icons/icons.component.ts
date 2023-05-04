@@ -64,7 +64,6 @@ export class IconsComponent extends BaseView {
 
     getIconByFileType(data: any): string {
         let fileType = this.getFileType(data)
-        console.log(data.name);
     
         let photoName = this.photoMap[fileType] || 'txt';
     

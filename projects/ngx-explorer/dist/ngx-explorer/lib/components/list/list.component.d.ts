@@ -7,6 +7,18 @@ export declare class ListComponent extends BaseView {
     readonly icons: {
         node: string;
         leaf: string;
+        pdf: string;
+        audio: string;
+        code: string;
+        doc: string;
+        exe: string;
+        odp: string;
+        img: string;
+        pptx: string;
+        vector: string;
+        video: string;
+        xlsx: string;
+        zip: string;
     };
     constructor(explorerService: ExplorerService, helperService: HelperService, filter: BehaviorSubject<string>);
     orderByName(): void;

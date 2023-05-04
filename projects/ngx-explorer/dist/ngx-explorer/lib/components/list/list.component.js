@@ -7,7 +7,19 @@ let ListComponent = class ListComponent extends BaseView {
         super(explorerService, helperService, filter);
         this.icons = {
             node: 'nxe-folder',
-            leaf: 'nxe-doc',
+            leaf: 'txt',
+            pdf: 'pdf',
+            audio: 'audio',
+            code: 'code',
+            doc: 'doc',
+            exe: 'exe',
+            odp: 'odp',
+            img: 'img',
+            pptx: 'pptx',
+            vector: 'vector',
+            video: 'video',
+            xlsx: 'xlsx',
+            zip: 'zip',
         };
         this.photoMap = {
             'application/pdf': 'pdf',
@@ -21,8 +33,8 @@ let ListComponent = class ListComponent extends BaseView {
             'video/mp4': 'video',
             'application/vnd.ms-excel': 'xlsx',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-            'image/jpeg': 'photo',
-            'image/png': 'photo',
+            'image/jpeg': 'img',
+            'image/png': 'img',
             'audio/x-ms-wma': 'audio',
             'audio/mpeg': 'audio',
             'audio/webm': 'audio.',
@@ -67,7 +79,18 @@ let ListComponent = class ListComponent extends BaseView {
     }
     getIconByFileType(data) {
         let fileType = this.getFileType(data);
-        const photoName = this.photoMap[fileType] || 'txt';
+        let photoName = this.photoMap[fileType] || 'txt';
+        if (!fileType) {
+            const type = (data.name).split('.');
+            if (type[type.length - 1] == 'png') {
+                photoName = 'img';
+                return photoName;
+            }
+            else if (type[type.length - 1] == 'jpg') {
+                photoName = 'img';
+                return photoName;
+            }
+        }
         return photoName;
     }
 };

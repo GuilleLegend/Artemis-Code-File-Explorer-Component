@@ -16,7 +16,7 @@ export class IconsComponent extends BaseView {
             doc: 'doc',
             exe: 'exe',
             odp: 'odp',
-            img: 'photo',
+            img: 'img',
             pptx: 'pptx',
             vector: 'vector',
             video: 'video',
@@ -35,8 +35,8 @@ export class IconsComponent extends BaseView {
             'video/mp4': 'video',
             'application/vnd.ms-excel': 'xlsx',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-            'image/jpeg': 'photo',
-            'image/png': 'photo',
+            'image/jpeg': 'img',
+            'image/png': 'img',
             'audio/x-ms-wma': 'audio',
             'audio/mpeg': 'audio',
             'audio/webm': 'audio.',
@@ -72,7 +72,18 @@ export class IconsComponent extends BaseView {
     }
     getIconByFileType(data) {
         let fileType = this.getFileType(data);
-        const photoName = this.photoMap[fileType] || 'txt';
+        let photoName = this.photoMap[fileType] || 'txt';
+        if (!fileType) {
+            const type = (data.name).split('.');
+            if (type[type.length - 1] == 'png') {
+                photoName = 'img';
+                return photoName;
+            }
+            else if (type[type.length - 1] == 'jpg') {
+                photoName = 'img';
+                return photoName;
+            }
+        }
         return photoName;
     }
 }
